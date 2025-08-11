@@ -40,6 +40,8 @@ def init_db():
     
     print(operation_info)
 
+    return render_template('index.html', info="Database initialized!")
+
 @app.route('/')
 def index():
     """

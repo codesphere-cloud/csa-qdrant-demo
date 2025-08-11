@@ -31,7 +31,7 @@
             margin-bottom: 25px;
             font-weight: 700;
         }
-        .error-message {
+        .message {
             color: #dc2626;
             background-color: #fee2e2;
             border: 1px solid #ef4444;
@@ -39,6 +39,12 @@
             border-radius: 8px;
             margin-bottom: 20px;
             font-weight: 500;
+        }
+        .error-message {
+            color: #dc2626;
+        }
+        .info-message {
+            color: #09649d;
         }
         .results-table {
             width: 100%;
@@ -77,8 +83,12 @@
         <h1 class="text-3xl">Qdrant Search Results 🚀</h1>
 
         {% if error %}
-            <div class="error-message">
+            <div class="message error-message">
                 {{ error }}
+            </div>
+        {% elif info %}
+            <div class="message info-message">
+                {{ info }}
             </div>
         {% elif points %}
             <table class="results-table shadow-sm">
