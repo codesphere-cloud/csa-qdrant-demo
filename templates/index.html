@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qdrant Search Results</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 900px; /* Increased max-width to accommodate new column */
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #1f2937;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        .error-message {
+            color: #dc2626;
+            background-color: #fee2e2;
+            border: 1px solid #ef4444;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: hidden; /* Ensures rounded corners apply to table */
+        }
+        .results-table th, .results-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: left;
+        }
+        .results-table th {
+            background-color: #f9fafb;
+            color: #4b5563;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+        }
+        .results-table tr:last-child td {
+            border-bottom: none;
+        }
+        .results-table tbody tr:hover {
+            background-color: #f3f4f6;
+        }
+        .no-results {
+            color: #6b7280;
+            padding: 20px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-3xl">Qdrant Search Results 🚀</h1>
+
+        {% if error %}
+            <div class="error-message">
+                {{ error }}
+            </div>
+        {% elif points %}
+            <table class="results-table shadow-sm">
+                <thead>
+                    <tr>
+                        <th>Point ID</th>
+                        <th>Vector (Preview)</th>
+                        <th>City</th> <!-- New header for City -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for point in points %}
+                    <tr>
+                        <td class="font-mono text-gray-800">{{ point.id }}</td>
+                        <td class="font-mono text-gray-700 text-sm">{{ point.vector_preview }}</td>
+                        <td class="font-bold text-gray-900">{{ point.city }}</td> <!-- New cell for City -->
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-results">No points found or collection is empty.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+

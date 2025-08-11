@@ -1,0 +1,20 @@
+schemaVersion: v0.2
+prepare:
+  steps:
+    - name: "Install dependencies"
+      command: pipenv install
+test:
+  steps:
+    - name: "noop"
+      command: echo "no tests implemented"
+run:
+  app: 
+    steps: 
+      - name: "run python"
+        command: pipenv run python main.py    
+    plan: 8
+    replicas: 1
+    isPublic: true
+    network:
+      path: /
+      stripPath: false

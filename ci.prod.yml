@@ -1,0 +1,20 @@
+schemaVersion: v0.2
+prepare:
+  steps:
+    - name: Install dependencies
+      command: pipenv install
+test:
+  steps:
+    - name: noop
+      command: echo "no tests implemented"
+run:
+  app:
+    steps:
+      - name: run application
+        command: pipenv run gunicorn -w 1 -b 0.0.0.0:3000 main:app
+    plan: 8
+    replicas: 1
+    isPublic: true
+    network:
+      path: /
+      stripPath: false
